@@ -10,8 +10,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import modelo.StatusVenda;
-import modelo.Venda;
+import modelo.*;
 
 /**
  *

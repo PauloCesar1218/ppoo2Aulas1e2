@@ -5,9 +5,16 @@
  */
 package processador.vendas;
 
+import compras.BoletoCompra;
+import compras.CreditoCompra;
+import compras.ProcessadorCompras;
 import exceptions.StatusVendaInvalidaException;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.List;
+
+import modelo.Compras;
+import modelo.MetodoCompras;
 import modelo.StatusVenda;
 import modelo.Venda;
 import servico.ProcessadorDeArquivos;
@@ -40,9 +47,25 @@ public class Main {
         try {
             ProcessadorDeArquivos processador = new ProcessadorDeArquivos();
             List<Venda> vendas = processador.processar(PATH);
-            
-            ProcessadorDeVendas processadorVendas = new ProcessadorDeVendas();
-            processadorVendas.processar(vendas);
+
+//            ProcessadorDeVendas processadorVendas = new ProcessadorDeVendas();
+//            processadorVendas.processar(vendas);
+
+            List<Compras> comprasItens = new ArrayList<>();
+            // mock
+            Compras boleto = new Compras();
+            boleto.setMetodoCompras(MetodoCompras.BOLETO);
+            boleto.setValor(200);
+            boleto.setData("19/08/2020");
+            comprasItens.add(boleto);
+            Compras compra = new Compras();
+            compra.setMetodoCompras(MetodoCompras.CREDITO);
+            compra.setValor(50);
+            compra.setData("05/02/2020");
+            comprasItens.add(compra);
+            // O que professor quer
+            ProcessadorCompras processadorCompras = new ProcessadorCompras();
+            processadorCompras.processar(comprasItens);
 
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
