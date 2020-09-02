@@ -5,6 +5,8 @@
  */
 package processador.vendas;
 
+import cliente.Cliente;
+import cliente.ClienteDAO;
 import compras.BoletoCompra;
 import compras.CreditoCompra;
 import compras.ProcessadorCompras;
@@ -13,10 +15,7 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
-import modelo.Compras;
-import modelo.MetodoCompras;
-import modelo.StatusVenda;
-import modelo.Venda;
+import modelo.*;
 import servico.ProcessadorDeArquivos;
 import servico.ProcessadorDeVendas;
 
@@ -66,6 +65,16 @@ public class Main {
             // O que professor quer
             ProcessadorCompras processadorCompras = new ProcessadorCompras();
             processadorCompras.processar(comprasItens);
+
+            Cliente cliente = new Cliente("jorge","123","456","19/08/2000");
+            ClienteDAO dao = new ClienteDAO();
+            if(dao.cadastrar(cliente)){
+                System.out.println("Cadastrou o " + cliente.getNome());
+            }else{
+                System.out.println("Nao cadastrou " + cliente.getNome());
+            }
+
+
 
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
